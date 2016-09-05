@@ -1,0 +1,2 @@
+require './slackbot'
+run Slackbot
