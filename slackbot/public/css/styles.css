@@ -13,13 +13,17 @@
 }
 .title {
     font-weight: bold;
-    font-size: 200%
+    font-size: 200%;
+    color: #42352A
 }
-
-#footer {
-    clear: both;
-    position: relative;
-    z-index: 10;
-    height: 3em;
-    margin-top: -3em;
+html,body {
+    background: url('../images/london.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover;         /* Generic*/
+}
+#shine-logo {
+    padding-left: 280px;
+    margin-top: -40px;
 }
