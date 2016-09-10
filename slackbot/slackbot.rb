@@ -13,10 +13,8 @@ class Slackbot < Sinatra::Base
   config = {
       'channel' => CONFIG[@environment]['slackbotsy']['channel'],
       'name' => CONFIG[@environment]['slackbotsy']['name'],
-      'api-token' => CONFIG[@environment]['slackbotsy']['api-token'],
       'incoming_webhook' => CONFIG[@environment]['slackbotsy']['incoming_webhook'],
-      'outgoing_token' => CONFIG[@environment]['slackbotsy']['outgoing_token'],
-      'slash_token' => CONFIG[@environment]['slackbotsy']['slash_token']
+      'outgoing_token' => CONFIG[@environment]['slackbotsy']['outgoing_token']
   }
 
   bot = Slackbotsy::Bot.new(config) do
@@ -29,14 +27,7 @@ class Slackbot < Sinatra::Base
       "Running aem command '#{mdata[1]}'"
     end
 
-    hear /flip out/i do
-      open('http://tableflipper.com/gif') do |f|
-        "<#{f.read}>"
-      end
-    end
-
   end
-
 
   post '/' do
     bot.handle_item(params)

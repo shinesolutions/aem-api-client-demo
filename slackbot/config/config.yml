@@ -1,11 +1,9 @@
 defaults: &defaults
   slackbotsy:
-    channel: '#michaeldiendertest2'
+    channel: '#default'
     name: 'botsy'
-#    api-token: 'Bots API Token'
-    incoming_webhook: 'https://hooks.slack.com/services/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'
-    outgoing_token: 'dlOrW2SjEVdCPPPzvMAMd405'
-#    slash_token: 'Slash Commands Token'
+    incoming_webhook: 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXX'
+    outgoing_token: 'secret'
 
 development:
   <<: *defaults

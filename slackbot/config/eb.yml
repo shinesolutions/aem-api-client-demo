@@ -1,4 +1,4 @@
-app: ruby-slackbot
+app: slackbot
 region: ap-southeast-2
 solution_stack_name: 64bit Amazon Linux 2016.03 v2.1.6 running Ruby 2.3 (Passenger Standalone)
 strategy: inplace-update
@@ -6,7 +6,7 @@ keep_latest: 10
 package:
   verbose: true
   includes: []
-  exclude_files: [ruby-slackbot.iml, Rakefile, config/eb.yml]
+  exclude_files: [slackbot.iml, Rakefile, config/eb.yml]
 smoke_test: |
     lambda { |host|
       EbSmokeTester.test_url("http://#{host}/health", 600, 5, 'All good! Everything is up and checks out.')
