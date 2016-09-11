@@ -17,7 +17,7 @@
     color: #42352A
 }
 html,body {
-    background: url('../images/london.jpg') no-repeat center center fixed;
+    background: url('../images/london.png') no-repeat center center fixed;
     -webkit-background-size: cover; /* For WebKit*/
     -moz-background-size: cover;    /* Mozilla*/
     -o-background-size: cover;      /* Opera*/
