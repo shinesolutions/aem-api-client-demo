@@ -7,41 +7,42 @@ require 'ruby_aem'
 
 class Slackbot < Sinatra::Base
 
-  @environment = 'development'
+  @@environment = 'development'
 
-  CONFIG = YAML::load_file(File.join(__dir__, 'config/config.yml'))
+  @@config = YAML::load_file(File.join(__dir__, 'config/config.yml'))
 
-  config = {
-      'channel' => CONFIG[@environment]['slackbotsy']['channel'],
-      'name' => CONFIG[@environment]['slackbotsy']['name'],
-      'incoming_webhook' => CONFIG[@environment]['slackbotsy']['incoming_webhook'],
-      'outgoing_token' => CONFIG[@environment]['slackbotsy']['outgoing_token']
+  slackbot_config = {
+      'channel' => @@config[@@environment]['slackbotsy']['channel'],
+      'name' => @@config[@@environment]['slackbotsy']['name'],
+      'incoming_webhook' => @@config[@@environment]['slackbotsy']['incoming_webhook'],
+      'outgoing_token' => @@config[@@environment]['slackbotsy']['outgoing_token']
   }
 
   aem = RubyAem::Aem.new({
-                             :username => CONFIG[@environment]['aem']['username'],
-                             :password => CONFIG[@environment]['aem']['password'],
+                             :username => @@config[@@environment]['aem']['username'],
+                             :password => @@config[@@environment]['aem']['password'],
                              :protocol => 'http',
-                             :host => CONFIG[@environment]['aem']['host'],
+                             :host => @@config[@@environment]['aem']['host'],
                              :port => 4502,
                              :debug => false
                          })
 
-  bot = Slackbotsy::Bot.new(config) do
+  bot = Slackbotsy::Bot.new(slackbot_config) do
 
-    hear /echo\s+(.+)/ do |mdata|
-      "I heard #{user_name} say '#{mdata[1]}' in #{channel_name}"
-    end
+    hear /createuser\s+(.+)/ do |mdata|
 
-    hear /aem\s+(.+)/ do |mdata|
+      login = "#{mdata[1]}"
 
-      # create group
-      group = aem.group('/home/groups/s/', 'somegroup')
+      group_id = "#{@@CONFIG[@@environment]['aem']['default_group']}"
 
-      # check group's existence
-      result = group.exists()
+      user = aem.user("/home/users/#{login[0]}", "#{login}")
 
-      'Created Group: ' + result
+      user_create_result = user.create(@@CONFIG[@@environment]['aem']['default_password'])
+
+      add_to_group_result = user.add_to_group("/home/groups/#{group_id[0]}/", group_id)
+
+      "#{user_create_result.message}\n#{add_to_group_result.message}"
+
     end
 
   end
