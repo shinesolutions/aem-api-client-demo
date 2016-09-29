@@ -33,11 +33,11 @@ class Slackbot < Sinatra::Base
 
       login = "#{mdata[1]}"
 
-      group_id = "#{@@CONFIG[@@environment]['aem']['default_group']}"
+      group_id = "#{@@config[@@environment]['aem']['default_group']}"
 
       user = aem.user("/home/users/#{login[0]}", "#{login}")
 
-      user_create_result = user.create(@@CONFIG[@@environment]['aem']['default_password'])
+      user_create_result = user.create(@@config[@@environment]['aem']['default_password'])
 
       add_to_group_result = user.add_to_group("/home/groups/#{group_id[0]}/", group_id)
 
