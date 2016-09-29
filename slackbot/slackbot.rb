@@ -34,7 +34,6 @@ class Slackbot < Sinatra::Base
     end
 
     hear /aem\s+(.+)/ do |mdata|
-      put 'Made IT!'
 
       # create group
       group = aem.group('/home/groups/s/', 'somegroup')
